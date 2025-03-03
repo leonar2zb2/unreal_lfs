@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Mensaje.h"
-void UMensaje::PrintString(FString cadena, bool EnPantalla, bool EnLog, FColor Color, int Clave, FString &Devuelta)
+void UMensaje::MostrarMensaje(FString cadena, bool EnPantalla, bool EnLog, FColor Color, int Clave, FString &Devuelta)
 {
     if (EnLog)
         UE_LOG(LogTemp, Warning, TEXT("Aquí se imprime %s"), *cadena);

@@ -15,7 +15,7 @@ class MYPROJECT2_API UMensaje : public UObject
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable, Category = "Mis métodos")
-	void PrintString(FString cadena, bool EnPantalla, bool EnLog, FColor Color, int Clave, FString &Devuelta);
+	void MostrarMensaje(FString cadena, bool EnPantalla, bool EnLog, FColor Color, int Clave, FString &Devuelta);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Tiempo;
