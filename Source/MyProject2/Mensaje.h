@@ -24,4 +24,7 @@ public:
 	int valor;
 
 	UMensaje();
+
+	UFUNCTION(BlueprintCallable, Category = "Mis métodos")
+	bool RestableceTiempo();
 };

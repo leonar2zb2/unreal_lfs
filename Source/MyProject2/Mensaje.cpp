@@ -14,3 +14,11 @@ UMensaje::UMensaje()
 {
     Tiempo = 5.0f;
 }
+
+bool UMensaje::RestableceTiempo()
+{
+    bool diferente;
+    diferente = Tiempo != 5.0f;
+    Tiempo = 5.0f;
+    return diferente;
+}

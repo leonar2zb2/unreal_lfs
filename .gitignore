@@ -4,6 +4,9 @@
 # Ignorar archivos de VSCode
 .vscode/
 
+# Ignorar archivos .code-workspace
+*.code-workspace
+
 # Compiled Object files
 *.slo
 *.lo
