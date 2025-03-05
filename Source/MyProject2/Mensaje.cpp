@@ -7,7 +7,7 @@ void UMensaje::MostrarMensaje(FString cadena, bool EnPantalla, bool EnLog, FColo
         UE_LOG(LogTemp, Warning, TEXT("Aquí se imprime %s"), *cadena);
     if (EnPantalla && GEngine)
         GEngine->AddOnScreenDebugMessage(Clave, Tiempo, Color, *cadena);
-    Devuelta = "Ejecutado correctamente";
+    Devuelta = "Este es mi mensaje";
 }
 
 UMensaje::UMensaje()
