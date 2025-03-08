@@ -10,6 +10,7 @@ public class MyProject2Target : TargetRules
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V4;
 
-		ExtraModuleNames.AddRange( new string[] { "MyProject2" } );
+		ExtraModuleNames.AddRange(new string[] { "MyProject2" });
+		ExtraModuleNames.AddRange(new string[] { "UtilModule" });
 	}
 }

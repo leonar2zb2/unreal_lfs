@@ -10,6 +10,7 @@ public class MyProject2EditorTarget : TargetRules
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V4;
 
-		ExtraModuleNames.AddRange( new string[] { "MyProject2" } );
+		ExtraModuleNames.AddRange(new string[] { "MyProject2" });
+		ExtraModuleNames.AddRange(new string[] { "UtilModule" });
 	}
 }

@@ -12,6 +12,11 @@
 			"AdditionalDependencies": [
 				"CoreUObject"
 			]
+		},
+		{
+			"Name": "UtilModule",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"			
 		}
 	],
 	"Plugins": [
