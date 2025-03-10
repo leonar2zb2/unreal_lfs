@@ -3,7 +3,6 @@
 	"EngineAssociation": "5.3",
 	"Category": "",
 	"Description": "",
-	"bCompileOnStartup": true,
 	"Modules": [
 		{
 			"Name": "MyProject2",
@@ -16,7 +15,10 @@
 		{
 			"Name": "UtilModule",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"			
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"CoreUObject"
+			]
 		}
 	],
 	"Plugins": [

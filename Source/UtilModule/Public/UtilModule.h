@@ -5,9 +5,3 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-class FUtilModule : public IModuleInterface
-{
-public:
-    virtual void StartupModule() override;
-    virtual void ShutdownModule() override;
-};
