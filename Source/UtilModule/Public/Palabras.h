@@ -18,6 +18,9 @@ public:
 	int Agregar(FString cadena);
 
 	UFUNCTION(BlueprintCallable, Category = "Palabras")
+	int AgregarMultiples(TArray<FString> cadenas);
+
+	UFUNCTION(BlueprintCallable, Category = "Palabras")
 	void Listar();
 
 private:

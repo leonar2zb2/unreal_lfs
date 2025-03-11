@@ -8,6 +8,12 @@ int UPalabras::Agregar(FString cadena)
     return Almacen.Num();
 }
 
+int UPalabras::AgregarMultiples(TArray<FString> cadenas)
+{
+    Almacen.Append(cadenas);
+    return Almacen.Num();
+}
+
 void UPalabras::Listar()
 {
     for (FString palabra : Almacen)
