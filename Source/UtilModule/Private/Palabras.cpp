@@ -48,10 +48,10 @@ bool UPalabras::ProbarConLetra(FString letra, FString &Resultado, int &IntentosP
     {
         caracter = letra[0]; // Tomar el primer carácter
         for (int i = 0; i < Seleccionada.Len(); i++)
-            if (Seleccionada[i] == caracter)
+            if (FChar::ToLower(Seleccionada[i]) == FChar::ToLower(caracter))
             {
                 Presente = true;
-                Respuesta[i] = caracter;
+                Respuesta[i] = Seleccionada[i];
             }
     }
     if (!Presente)
