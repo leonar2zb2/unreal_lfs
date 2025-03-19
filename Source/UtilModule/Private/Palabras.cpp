@@ -58,6 +58,17 @@ bool UPalabras::ProbarConLetra(FString letra, FString &Resultado, int &IntentosP
         IntentosRestantes--;
     IntentosPendientes = IntentosRestantes;
     Resultado = Respuesta;
+
+    if (Resultado == Seleccionada)
+    {
+        if (Adivinado.IsBound())
+        {
+            if (GEngine)
+                GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, TEXT("Ocurrio el EVENTO ha adivinado!"));
+            Adivinado.Broadcast();
+        }
+    }
+
     return Presente;
 }
 

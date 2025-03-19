@@ -6,6 +6,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Palabras.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPalabraAdivinada);
 /**
  *
  */
@@ -14,6 +15,8 @@ class UTILMODULE_API UPalabras : public UObject
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY(BlueprintAssignable, Category = "Event")
+	FPalabraAdivinada Adivinado;
 	/**
 	 * Permite agregar una cadena de texto a las palabras seleccionadas a adivinar
 	 * @param cadena La cadena que se desea agregar
