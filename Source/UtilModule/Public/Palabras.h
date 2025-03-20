@@ -6,7 +6,8 @@
 #include "UObject/NoExportTypes.h"
 #include "Palabras.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPalabraAdivinada);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPalabraAdivinada, FString, PalabraSecreta);
+
 /**
  *
  */

@@ -65,7 +65,7 @@ bool UPalabras::ProbarConLetra(FString letra, FString &Resultado, int &IntentosP
         {
             if (GEngine)
                 GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, TEXT("Ocurrio el EVENTO ha adivinado!"));
-            Adivinado.Broadcast();
+            Adivinado.Broadcast(Resultado);
         }
     }
 
