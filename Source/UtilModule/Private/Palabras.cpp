@@ -2,6 +2,8 @@
 
 #include "Palabras.h"
 #include "Math/UnrealMathUtility.h"
+#include "JsonObjectConverter.h"
+#include "Http.h"
 
 int UPalabras::Agregar(FString cadena)
 {
@@ -79,3 +81,71 @@ FString UPalabras::Revelar(bool &Revelado)
         return Seleccionada;
     return FString::ChrN(Seleccionada.Len(), TEXT('*'));
 }
+
+void UPalabras::DescargarDesdeApi()
+{
+    FHttpRequestPtr HttpRequest = FHttpModule::Get().CreateRequest();
+    HttpRequest->OnProcessRequestComplete().BindUObject(this, &UPalabras::HandleListarPalabras);
+    HttpRequest->SetVerb("GET");
+    FString fullURL = API_URL;
+    fullURL += TEXT("palabras");
+    HttpRequest->SetURL(fullURL);
+    HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
+    HttpRequest->SetHeader(TEXT("Accept"), TEXT("application/json"));
+    GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, *fullURL);
+    HttpRequest->ProcessRequest();
+}
+
+void UPalabras::HandleListarPalabras(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
+{
+    FPalabrasResponse lista;
+    if (!bWasSuccessful)
+    {
+        lista.message = TEXT("Error de red: Revise conexión, DNS, Firewall");
+        if (RespuestaListando.IsBound())
+            RespuestaListando.Broadcast(lista);
+        return;
+    }
+
+    if (!Response || Response->GetResponseCode() != 200)
+    {
+        lista.message = TEXT("Error de respuesta del API");
+        if (RespuestaListando.IsBound())
+            RespuestaListando.Broadcast(lista);
+        return;
+    }
+
+    FString ResponseCall = Response->GetContentAsString();
+    if (!FJsonObjectConverter::JsonObjectStringToUStruct(ResponseCall, &lista, 0, 0))
+    {
+        lista.message = TEXT("Estructura recibida del API no es JSON o es incompatible");
+        if (RespuestaListando.IsBound())
+            RespuestaListando.Broadcast(lista);
+        return;
+    }
+
+    if (lista.data.Num() == 0)
+    {
+        lista.success = false;
+        lista.message = TEXT("Ninguna cadena fué devuelta");
+        if (RespuestaListando.IsBound())
+            RespuestaListando.Broadcast(lista);
+        return;
+    }
+
+    lista.message = TEXT("Listado de palabras");
+    lista.success = true;
+    RespuestaListando.Broadcast(lista);
+}
+
+/*
+   También existe la posibilidad de parsear el JSON manualmente usando FJsonSerializer::Deserialize()
+ y acceder a cada campo uno por uno con JsonObject->GetStringField(), JsonObject->GetBoolField(), etc.
+ Esta alternativa es más flexible (por ejemplo, para validar o transformar datos antes de asignarlos),
+ pero también es más laboriosa y compleja de mantener, por lo que solo la recomendamos en casos donde
+ el JSON tenga una estructura muy irregular o cuando necesites un control muy fino sobre la deserialización.
+ Necesita además otros includes:
+#include "Dom/JsonObject.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
+*/

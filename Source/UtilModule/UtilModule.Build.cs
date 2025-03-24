@@ -10,7 +10,7 @@ public class UtilModule : ModuleRules
 
 		PublicDependencyModuleNames.AddRange(new string[] { });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "HTTP", "Json", "JsonUtilities" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

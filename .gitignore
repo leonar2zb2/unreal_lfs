@@ -1,6 +1,9 @@
 # Visual Studio 2015 user specific files
 .vs/
 
+# Fichero de configuración con la URL del API contenido: #define API_URL TEXT("URL del API")
+Source/UtilModule/Public/conf.h
+
 # Ignorar archivos de VSCode
 .vscode/
 

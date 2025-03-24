@@ -4,9 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "conf.h"
+#include "Response.h"
 #include "Palabras.generated.h"
 
+class IHttpRequest;
+class IHttpResponse;
+// Alias para punteros inteligentes
+typedef TSharedPtr<IHttpRequest, ESPMode::ThreadSafe> FHttpRequestPtr;
+typedef TSharedPtr<IHttpResponse, ESPMode::ThreadSafe> FHttpResponsePtr;
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPalabraAdivinada, FString, PalabraSecreta);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPalabrasDesdeAPI, FPalabrasResponse, RespuestaListando);
 
 /**
  *
@@ -18,6 +27,9 @@ class UTILMODULE_API UPalabras : public UObject
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Event")
 	FPalabraAdivinada Adivinado;
+
+	UPROPERTY(BlueprintAssignable, Category = "Event")
+	FPalabrasDesdeAPI RespuestaListando;
 	/**
 	 * Permite agregar una cadena de texto a las palabras seleccionadas a adivinar
 	 * @param cadena La cadena que se desea agregar
@@ -67,7 +79,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Palabras")
 	FString Revelar(bool &Revelado);
 
+	/**
+	 * Inicia la descarga de palabras desde el endpoint del API
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Palabras")
+	void DescargarDesdeApi();
+
 private:
+	void HandleListarPalabras(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 	TArray<FString> Almacen;
 	FString Seleccionada;
 	FString Respuesta;
